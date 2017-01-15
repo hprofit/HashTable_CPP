@@ -22,6 +22,7 @@ public:
 	};
 
 	void addItem(TYPE value);
+	void removeItem();
 	LinkedListNode<TYPE>* getFirstNode();
 	LinkedListNode<TYPE>* findNodeWithValue(TYPE value);
 };
