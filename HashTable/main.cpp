@@ -27,6 +27,8 @@ int main()
 
 	cout << hash->getValue(4) << endl;
 
+	cout << hash->getValue(11) << endl;
+
 	unique_ptr< LinkedList<string, int> > linkedList(new LinkedList<string, int>());
 
 	for (int idx = 0; idx < 10; idx++)

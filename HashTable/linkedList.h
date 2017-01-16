@@ -163,17 +163,18 @@ public:
 
 		while (true)
 		{
+			if (currentNode == NULL)
+			{
+				delete currentNode;
+				break;
+			}
+
 			if (currentNode->getKey() == key)
 			{
 				return currentNode;
 			}
 
 			currentNode = currentNode->getNextNode();
-			if (currentNode == NULL)
-			{
-				delete currentNode;
-				break;
-			}
 		}
 
 		return NULL;

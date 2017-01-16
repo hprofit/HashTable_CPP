@@ -58,7 +58,15 @@ public:
 	{
 		int hashArrayIndex = getHashArrayIndex(key);
 		LinkedListNode<KEY_TYPE, VALUE_TYPE>* node = hashArray.at(hashArrayIndex)->findItemWithKey(key);
-		return node->getValue();
+		if (node != NULL)
+		{
+			return node->getValue();
+		}
+		else
+		{
+			VALUE_TYPE val = VALUE_TYPE();
+			return val;
+		}
 	};
 };
 #endif
