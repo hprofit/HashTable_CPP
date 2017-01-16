@@ -118,13 +118,13 @@ public:
 		currentLength++;
 	};
 
-	void removeItem(VALUE_TYPE value)
+	void removeItemByValue(VALUE_TYPE value)
 	{
 		int indexOfNode = getIndexOfNodeWithValue(value);
 		removeNodeAtIndex(indexOfNode);
 	};
 
-	void removeItem(KEY_TYPE key)
+	void removeItemByKey(KEY_TYPE key)
 	{
 		int indexOfNode = getIndexOfNodeWithKey(key);
 		removeNodeAtIndex(indexOfNode);

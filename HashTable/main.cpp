@@ -24,10 +24,28 @@ int main()
 	{
 		hash->addPair(idx, keys.at(idx - 1));
 	}
-
 	cout << hash->getValue(4) << endl;
-
 	cout << hash->getValue(11) << endl;
+
+
+
+	unique_ptr< HashTable<int, int> > intHash(new HashTable<int, int>());
+
+	for (int idx = 1; idx < 1000; idx++)
+	{
+		if (idx < 81)
+		{
+			intHash->addPair(idx, idx);
+		}
+		else
+		{
+			intHash->addPair(idx, idx);
+		}
+	}
+	cout << "4: " << intHash->getValue(4) << endl;
+	cout << "999: " << intHash->getValue(999) << endl;
+	cout << "1000: " << intHash->getValue(1000) << endl;
+
 
 	unique_ptr< LinkedList<string, int> > linkedList(new LinkedList<string, int>());
 
