@@ -38,6 +38,12 @@ private:
 		}
 	};
 
+	bool isKeyInLinkedList(int index, KEY_TYPE key)
+	{
+		LinkedListNode<KEY_TYPE, VALUE_TYPE>* node = hashArray.at(index)->findItemWithKey(key);
+		return node != NULL;
+	}
+
 public:
 	HashTable<KEY_TYPE, VALUE_TYPE>()
 	{
@@ -79,7 +85,7 @@ public:
 
 					// If the new hashArrayIndex is out of range of the current hashArray, 
 					// rehash before restarting loop
-					if (hashArrayIndex > hashArray.size())
+					if (hashArrayIndex >= hashArray.size())
 					{
 						rehash();
 					}
@@ -88,23 +94,56 @@ public:
 		}
 	};
 
-	bool isKeyInLinkedList(int index, KEY_TYPE key)
-	{
-		LinkedListNode<KEY_TYPE, VALUE_TYPE>* node = hashArray.at(index)->findItemWithKey(key);
-		return node != NULL;
-	}
-
 	void deletePair(KEY_TYPE key)
 	{
 		int hashArrayIndex = getHashArrayIndex(key);
-		hashArray.at(hashArrayIndex)->removeItem(key);
+		bool found = false;
+
+		while (!found)
+		{
+			if (!isKeyInLinkedList(hashArrayIndex, key))
+			{
+				hashArrayIndex += maxHashArraySize;
+				// We've reached the end of the hashArray, return default value
+				if (hashArrayIndex >= hashArray.size())
+				{
+					found = true;
+				}
+			}
+			else
+			{
+				// Value exists in the linkedList at the given hashArrayIndex,
+				// remove the item and set found to true
+				hashArray.at(hashArrayIndex)->removeItemByKey(key);
+				found = true;
+			}
+		}
 	};
 
 	void setValue(KEY_TYPE key, VALUE_TYPE value)
 	{
 		int hashArrayIndex = getHashArrayIndex(key);
-		LinkedListNode<KEY_TYPE, VALUE_TYPE>* node = hashArray.at(hashArrayIndex)->findItemWithKey(key);
-		node->setValue(value);
+		bool found = false;
+
+		while (!found)
+		{
+			if (!isKeyInLinkedList(hashArrayIndex, key))
+			{
+				hashArrayIndex += maxHashArraySize;
+				// We've reached the end of the hashArray, return default value
+				if (hashArrayIndex >= hashArray.size())
+				{
+					found = true;
+				}
+			}
+			else
+			{
+				// Value exists in the linkedList at the given hashArrayIndex,
+				// set the value and set found to true
+				hashArray.at(hashArrayIndex)->findItemWithKey(key)->setValue(value);;
+				found = true;
+			}
+		}
 	};
 
 	VALUE_TYPE getValue(KEY_TYPE key)

@@ -182,12 +182,12 @@ public:
 
 	LinkedListNode<KEY_TYPE, VALUE_TYPE>* getItemAtIndex(int index)
 	{
-		if (index >= currentLength)
+		if (index >= static_cast<int>(currentLength))
 		{
 			throw std::out_of_range("Index exceeded end of list.");
 		}
 
-		LinkedListNode<TYPE>* currentNode = firstNode;
+		LinkedListNode<KEY_TYPE, VALUE_TYPE>* currentNode = firstNode;
 		int curIndex = 0;
 
 		while (curIndex != index)

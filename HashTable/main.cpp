@@ -31,19 +31,20 @@ int main()
 
 	unique_ptr< HashTable<int, int> > intHash(new HashTable<int, int>());
 
-	for (int idx = 1; idx < 1000; idx++)
+	for (int idx = 1; idx < 32768; idx++)
 	{
-		if (idx < 81)
-		{
-			intHash->addPair(idx, idx);
-		}
-		else
-		{
-			intHash->addPair(idx, idx);
-		}
+		intHash->addPair(idx, idx);
 	}
 	cout << "4: " << intHash->getValue(4) << endl;
 	cout << "999: " << intHash->getValue(999) << endl;
+	cout << "998 - Before Removal: " << intHash->getValue(998) << endl;
+	intHash->deletePair(998);
+	cout << "998 - After Removal: " << intHash->getValue(998) << endl;
+
+	cout << "997 - Before Change: " << intHash->getValue(997) << endl;
+	intHash->setValue(997, 1001);
+	cout << "997 - After Change: " << intHash->getValue(997) << endl;
+
 	cout << "1000: " << intHash->getValue(1000) << endl;
 
 
